@@ -52,6 +52,19 @@ QuickDrop simulates a quick-commerce platform where customers can browse product
 - Implement Queueable Apex and scheduled retry processing for eligible failures.
 
 The external delivery integration requires a configured endpoint and a compatible external API. Its successful end-to-end operation depends on that external service being available and correctly configured.
+## Application Screenshots
+
+### Product Catalog
+![QuickDrop Product Catalog](docs/screenshots/product-catalog.png)
+
+### Shopping Cart
+![QuickDrop Shopping Cart](docs/screenshots/cart.png)
+
+### Checkout
+![QuickDrop Checkout](docs/screenshots/checkout.png)
+
+### Delivery Tracking
+![QuickDrop Delivery Tracking](docs/screenshots/delivery-tracking.png)
 
 ## Technology Stack
 
