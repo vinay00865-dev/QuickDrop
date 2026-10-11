@@ -1,0 +1,204 @@
+<template>
+
+    <lightning-card
+        title="QuickDrop Product Catalog"
+        icon-name="standard:product">
+
+        <div class="catalog-container">
+
+            <!-- SEARCH + FILTER -->
+
+            <div class="catalog-controls">
+
+                <div class="search-box">
+
+                    <lightning-input
+                        type="search"
+                        label="Search Products"
+                        variant="label-hidden"
+                        placeholder="Search by product, brand or SKU..."
+                        value={searchTerm}
+                        onchange={handleSearch}>
+                    </lightning-input>
+
+                </div>
+
+
+                <div class="category-box">
+
+                    <lightning-combobox
+                        label="Category"
+                        variant="label-hidden"
+                        value={selectedCategory}
+                        options={categoryOptions}
+                        onchange={handleCategoryChange}>
+                    </lightning-combobox>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULT COUNT -->
+
+            <div class="result-header">
+
+                <div>
+
+                    <span class="section-label">
+                        QUICKDROP STORE
+                    </span>
+
+                    <h2>
+                        Shop your essentials
+                    </h2>
+
+                </div>
+
+                <span class="product-count">
+                    {productCount} products
+                </span>
+
+            </div>
+
+
+            <!-- LOADING -->
+
+            <template if:true={loading}>
+
+                <div class="loading-container">
+
+                    <lightning-spinner
+                        alternative-text="Loading products">
+                    </lightning-spinner>
+
+                </div>
+
+            </template>
+
+
+            <!-- PRODUCTS -->
+
+            <template if:true={hasProducts}>
+
+                <div class="product-grid">
+
+                    <template
+                        for:each={filteredProducts}
+                        for:item="product">
+
+                        <article
+                            class="product-card"
+                            key={product.Id}>
+
+                            <div class="product-top">
+
+                                <span class="category-tag">
+                                    {product.categoryName}
+                                </span>
+
+                                <span class="sku">
+                                    {product.SKU__c}
+                                </span>
+
+                            </div>
+
+
+                            <div class="product-body">
+
+                                <h3>
+                                    {product.Name}
+                                </h3>
+
+                                <p class="brand">
+                                    {product.Brand__c}
+                                </p>
+
+
+                                <div class="pricing">
+
+                                    <span class="selling-price">
+                                        ₹{product.Selling_Price__c}
+                                    </span>
+
+                                    <span class="mrp">
+                                        ₹{product.MRP__c}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="product-footer">
+
+                                <button
+                                    class="add-cart-button"
+                                    data-id={product.Id}
+                                    onclick={handleAddToCart}>
+
+                                    <lightning-icon
+                                        icon-name="utility:cart"
+                                        size="x-small"
+                                        alternative-text="Add to Cart">
+                                    </lightning-icon>
+
+                                    <span>
+                                        Add to Cart
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    </template>
+
+                </div>
+
+            </template>
+
+
+            <!-- NO RESULTS -->
+
+            <template if:false={hasProducts}>
+
+                <div class="empty-state">
+
+                    <lightning-icon
+                        icon-name="utility:search"
+                        size="medium">
+                    </lightning-icon>
+
+                    <h3>
+                        No products found
+                    </h3>
+
+                    <p>
+                        Try another product name, brand,
+                        SKU or category.
+                    </p>
+
+                </div>
+
+            </template>
+
+
+            <!-- ERROR -->
+
+            <template if:true={error}>
+
+                <div class="error-message">
+
+                    Unable to load QuickDrop products.
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </lightning-card>
+
+</template>

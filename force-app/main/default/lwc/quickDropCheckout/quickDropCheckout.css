@@ -1,0 +1,428 @@
+.checkout-container {
+    width: min(1100px, calc(100% - 40px));
+    margin: 30px auto 50px;
+    color: #0f172a;
+}
+
+
+.loading-container {
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.checkout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+
+.checkout-label {
+    color: #0b7cff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+
+.checkout-header h1 {
+    margin: 6px 0;
+    font-size: 30px;
+}
+
+
+.checkout-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+.secure-badge {
+    background: #ecfdf3;
+    color: #15803d;
+    padding: 9px 13px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CONTEXT
+   ========================================================= */
+
+.context-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: #ffffff;
+    border: 1px solid #dfe7f0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+
+.context-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #eef6ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+
+.context-heading {
+    font-size: 10px;
+    color: #64748b;
+    margin-bottom: 3px;
+}
+
+
+.context-content strong {
+    font-size: 13px;
+}
+
+
+.context-address {
+    margin-top: 3px;
+    font-size: 11px;
+    color: #475569;
+}
+
+
+.context-store {
+    margin-top: 5px;
+    font-size: 10px;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 350px;
+    gap: 22px;
+}
+
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+.checkout-card {
+    background: #ffffff;
+    border: 1px solid #dfe7f0;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.summary-card {
+    background: #ffffff;
+    border: 1px solid #dfe7f0;
+    border-radius: 14px;
+    padding: 22px;
+    height: fit-content;
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+}
+
+
+.summary-title {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+
+.summary-meta {
+    margin-top: 4px;
+    margin-bottom: 17px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 12px;
+}
+
+
+.summary-item strong {
+    display: block;
+    font-size: 12px;
+}
+
+
+.summary-item span {
+    color: #64748b;
+}
+
+
+.summary-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 10px 0 16px;
+}
+
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+    font-size: 13px;
+    color: #475569;
+}
+
+
+.summary-row span:last-child {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+
+.free {
+    color: #16a34a !important;
+}
+
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.summary-total span {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+.summary-total strong {
+    font-size: 23px;
+}
+
+
+/* =========================================================
+   PLACE ORDER
+   ========================================================= */
+
+.place-order-button {
+    width: 100%;
+    border: none;
+    border-radius: 9px;
+    padding: 14px;
+    background: #0b7cff;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+.place-order-button:hover {
+    background: #066bd7;
+}
+
+
+.place-order-button:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+}
+
+
+.secure-note {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 9px;
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.success-card {
+    max-width: 650px;
+    margin: 60px auto;
+    padding: 45px;
+    background: #ffffff;
+    border: 1px solid #dfe7f0;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+}
+
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+
+.success-label {
+    color: #16a34a;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+
+.success-card h1 {
+    margin: 8px 0;
+    font-size: 28px;
+}
+
+
+.success-card p {
+    margin: 0 auto 25px;
+    max-width: 470px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+.success-order,
+.success-total {
+    display: flex;
+    justify-content: space-between;
+    max-width: 330px;
+    margin: 10px auto;
+    padding: 12px 15px;
+    border-radius: 9px;
+    background: #f8fafc;
+    font-size: 13px;
+}
+
+
+.success-payment {
+    margin: 16px 0 20px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+
+.orders-button {
+    border: none;
+    border-radius: 9px;
+    padding: 12px 22px;
+    background: #0b7cff;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-card {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+}
+
+
+.error-icon {
+    font-size: 22px;
+}
+
+
+.error-card h2 {
+    margin: 0 0 4px;
+    font-size: 17px;
+}
+
+
+.error-card p {
+    margin: 0;
+    color: #9a3412;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .checkout-container {
+        width: calc(100% - 24px);
+    }
+
+
+    .checkout-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .success-card {
+        padding: 30px 20px;
+    }
+
+}

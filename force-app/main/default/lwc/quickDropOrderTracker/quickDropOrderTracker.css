@@ -1,0 +1,280 @@
+.orders-page {
+    padding: 32px;
+    background: #f5f7fb;
+    min-height: 500px;
+}
+
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+}
+
+.brand-label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #1677ff;
+    margin-bottom: 6px;
+}
+
+.orders-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.orders-header p {
+    margin: 8px 0 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.refresh-button {
+    border: 1px solid #d9e1ec;
+    background: white;
+    color: #1f2937;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.refresh-button:hover {
+    background: #f8fafc;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.order-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+.order-number {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.order-date {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.order-body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.info-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.total-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.status-badge,
+.payment-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: 999px;
+    padding: 6px 11px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.status-draft {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.status-confirmed {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-preparing {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-ready-for-pickup {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-out-for-delivery {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.status-delivered {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-cancelled {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.payment-paid,
+.payment-success {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.payment-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.payment-failed {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.payment-refunded {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 17px;
+    border-top: 1px solid #edf1f6;
+}
+
+.eta {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.track-button {
+    border: none;
+    background: #1677ff;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.track-button:hover {
+    background: #0f63d8;
+}
+
+.state-card {
+    min-height: 220px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    color: #6b7280;
+}
+
+.state-card h2 {
+    margin: 8px 0 0;
+    color: #111827;
+}
+
+.state-card p {
+    margin: 0;
+}
+
+.error-card {
+    border-color: #fecaca;
+}
+
+.state-icon {
+    font-size: 34px;
+}
+
+.retry-button {
+    margin-top: 8px;
+    border: none;
+    background: #1677ff;
+    color: white;
+    border-radius: 9px;
+    padding: 10px 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .order-body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .orders-page {
+        padding: 18px;
+    }
+
+    .orders-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .order-body {
+        grid-template-columns: 1fr;
+    }
+
+    .order-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+}

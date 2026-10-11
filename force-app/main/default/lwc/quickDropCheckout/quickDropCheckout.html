@@ -1,0 +1,427 @@
+<template>
+
+    <!-- SUCCESS SCREEN -->
+    <template if:true={isOrderPlaced}>
+        <div class="checkout-page success-page">
+
+            <div class="success-card">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h1>Order Placed Successfully!</h1>
+
+                <p class="success-message">
+                    Thank you for ordering with QuickDrop.
+                    Your order has been received successfully.
+                </p>
+
+                <div class="success-details">
+
+                    <div class="success-row">
+                        <span>Order Number</span>
+                        <strong>{orderResult.orderNumber}</strong>
+                    </div>
+
+                    <div class="success-row">
+                        <span>Payment Status</span>
+                        <strong>{orderResult.paymentStatus}</strong>
+                    </div>
+
+                    <div class="success-row">
+                        <span>Order Total</span>
+                        <strong>
+                            <lightning-formatted-number
+                                value={orderResult.grandTotal}
+                                format-style="currency"
+                                currency-code="INR"
+                                maximum-fraction-digits="2">
+                            </lightning-formatted-number>
+                        </strong>
+                    </div>
+
+                </div>
+
+                <p class="success-note">
+                    You can track your order from <strong>My Orders</strong>.
+                </p>
+
+            </div>
+
+        </div>
+    </template>
+
+
+    <!-- CHECKOUT SCREEN -->
+    <template if:false={isOrderPlaced}>
+
+        <div class="checkout-page">
+
+            <!-- HEADER -->
+            <div class="checkout-header">
+
+                <div>
+                    <div class="brand-label">QUICKDROP</div>
+
+                    <h1>Checkout</h1>
+
+                    <p>
+                        Review your order and complete your purchase.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- ERROR -->
+            <template if:true={error}>
+                <div class="error-banner">
+
+                    <div class="error-icon">⚠</div>
+
+                    <div>
+                        <strong>Checkout Error</strong>
+                        <p>{error}</p>
+                    </div>
+
+                </div>
+            </template>
+
+
+            <!-- LOADING -->
+            <template if:true={isLoading}>
+                <div class="loading-card">
+
+                    <lightning-spinner
+                        alternative-text="Loading checkout"
+                        size="medium">
+                    </lightning-spinner>
+
+                    <p>Preparing your checkout...</p>
+
+                </div>
+            </template>
+
+
+            <!-- CHECKOUT CONTENT -->
+            <template if:true={hasCheckout}>
+
+                <div class="checkout-grid">
+
+
+                    <!-- LEFT SIDE -->
+                    <div class="checkout-left">
+
+
+                        <!-- CUSTOMER CONTEXT -->
+                        <section class="checkout-card context-card">
+
+                            <div class="section-title">
+                                <h2>Delivery Details</h2>
+                            </div>
+
+                            <div class="context-details">
+
+                                <div class="context-item">
+                                    <span class="context-label">
+                                        Customer
+                                    </span>
+
+                                    <span class="context-value">
+                                        {context.customerName}
+                                    </span>
+                                </div>
+
+
+                                <div class="context-item">
+                                    <span class="context-label">
+                                        Store
+                                    </span>
+
+                                    <span class="context-value">
+                                        {context.storeName}
+                                    </span>
+                                </div>
+
+
+                                <div class="context-item full-width">
+                                    <span class="context-label">
+                                        Delivering To
+                                    </span>
+
+                                    <span class="context-value">
+                                        {selectedAddressLabel}
+                                    </span>
+
+                                    <span class="context-address">
+                                        {selectedAddressLine},
+                                        {selectedAddressCity},
+                                        {selectedAddressState}
+                                        - {selectedAddressPincode}
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- ADDRESS -->
+                        <section class="checkout-card">
+
+                            <div class="section-title">
+
+                                <div>
+                                    <h2>Choose Delivery Address</h2>
+
+                                    <p>
+                                        Select where you want your order delivered.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <lightning-radio-group
+                                name="deliveryAddress"
+                                label="Delivery Address"
+                                options={addressOptions}
+                                value={selectedAddressId}
+                                type="radio"
+                                onchange={handleAddressChange}>
+                            </lightning-radio-group>
+
+
+                            <div class="selected-address">
+
+                                <span class="selected-label">
+                                    Selected Address
+                                </span>
+
+                                <strong>
+                                    {selectedAddressLabel}
+                                </strong>
+
+                                <span>
+                                    {selectedAddressLine},
+                                    {selectedAddressCity},
+                                    {selectedAddressState}
+                                    - {selectedAddressPincode}
+                                </span>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- PAYMENT -->
+                        <section class="checkout-card">
+
+                            <div class="section-title">
+
+                                <div>
+                                    <h2>Payment Method</h2>
+
+                                    <p>
+                                        Choose how you want to pay.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <lightning-radio-group
+                                name="paymentMethod"
+                                label="Payment Method"
+                                options={paymentOptions}
+                                value={paymentMethod}
+                                type="radio"
+                                onchange={handlePaymentChange}>
+                            </lightning-radio-group>
+
+
+                            <div class="payment-info">
+
+                                <template if:true={paymentMethod}>
+                                    <span>
+                                        Selected payment method:
+                                    </span>
+
+                                    <strong>
+                                        {paymentMethod}
+                                    </strong>
+                                </template>
+
+                            </div>
+
+                        </section>
+
+
+                        <!-- CART ITEMS -->
+                        <section class="checkout-card">
+
+                            <div class="section-title">
+
+                                <div>
+                                    <h2>Your Order</h2>
+
+                                    <p>
+                                        Items currently in your cart.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="items-list">
+
+                                <template
+                                    for:each={checkoutItems}
+                                    for:item="item">
+
+                                    <div
+                                        class="checkout-item"
+                                        key={item.Id}>
+
+                                        <div class="item-main">
+
+                                            <div class="item-name">
+                                                {item.QuickDrop_Product__r.Name}
+                                            </div>
+
+                                            <div class="item-quantity">
+                                                Qty: {item.Quantity__c}
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="item-price">
+
+                                            <lightning-formatted-number
+                                                value={item.Line_Total__c}
+                                                format-style="currency"
+                                                currency-code="INR"
+                                                maximum-fraction-digits="2">
+                                            </lightning-formatted-number>
+
+                                        </div>
+
+                                    </div>
+
+                                </template>
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+
+                    <!-- RIGHT SIDE -->
+                    <div class="checkout-right">
+
+                        <section class="checkout-card summary-card">
+
+                            <div class="summary-title">
+                                Order Summary
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>Subtotal</span>
+
+                                <lightning-formatted-number
+                                    value={subtotal}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    maximum-fraction-digits="2">
+                                </lightning-formatted-number>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>Tax</span>
+
+                                <lightning-formatted-number
+                                    value={tax}
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    maximum-fraction-digits="2">
+                                </lightning-formatted-number>
+
+                            </div>
+
+
+                            <div class="summary-row">
+
+                                <span>Delivery Fee</span>
+
+                                <lightning-formatted-number
+                                    value="40"
+                                    format-style="currency"
+                                    currency-code="INR"
+                                    maximum-fraction-digits="2">
+                                </lightning-formatted-number>
+
+                            </div>
+
+
+                            <div class="summary-divider"></div>
+
+
+                            <div class="summary-total">
+
+                                <span>Total</span>
+
+                                <strong>
+
+                                    <lightning-formatted-number
+                                        value={grandTotal}
+                                        format-style="currency"
+                                        currency-code="INR"
+                                        maximum-fraction-digits="2">
+                                    </lightning-formatted-number>
+
+                                </strong>
+
+                            </div>
+
+
+                            <button
+                                class="place-order-button"
+                                onclick={handlePlaceOrder}
+                                disabled={isPlacingOrder}>
+
+                                <template if:true={isPlacingOrder}>
+                                    Processing Order...
+                                </template>
+
+                                <template if:false={isPlacingOrder}>
+                                    Place Order
+                                </template>
+
+                            </button>
+
+
+                            <p class="secure-note">
+                                🔒 Your QuickDrop checkout is secure.
+                            </p>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </template>
+
+</template>

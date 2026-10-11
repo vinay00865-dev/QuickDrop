@@ -1,0 +1,352 @@
+<template>
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="store-header">
+
+        <div class="brand-area">
+
+            <div class="brand-icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <div class="brand-name">
+                    QuickDrop
+                </div>
+
+                <div class="brand-tagline">
+                    Fast. Fresh. Delivered.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="desktop-nav">
+
+            <button
+                class={homeClass}
+                data-view="home"
+                onclick={handleNavigation}>
+                🏠 Home
+            </button>
+
+
+            <button
+                class={cartClass}
+                data-view="cart"
+                onclick={handleNavigation}>
+                🛒 Cart
+            </button>
+
+
+            <button
+                class={checkoutClass}
+                data-view="checkout"
+                onclick={handleNavigation}>
+                💳 Checkout
+            </button>
+
+
+            <button
+                class={ordersClass}
+                data-view="orders"
+                onclick={handleNavigation}>
+                📦 My Orders
+            </button>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <span>🛒</span>
+            <span>▰</span>
+            <span>👤</span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         AUTOMATIC CUSTOMER CONTEXT
+         ===================================================== -->
+
+    <section class="context-bar">
+
+        <template lwc:if={isContextLoading}>
+
+            <div class="context-loading">
+
+                <lightning-spinner
+                    alternative-text="Loading account"
+                    size="small">
+                </lightning-spinner>
+
+                <span>
+                    Loading your QuickDrop account...
+                </span>
+
+            </div>
+
+        </template>
+
+
+        <template lwc:elseif={hasContext}>
+
+            <div class="context-main-area">
+
+                <div class="context-icon">
+                    📍
+                </div>
+
+
+                <div class="context-details">
+
+                    <div class="context-title">
+
+                        Delivering to
+
+                        <strong>
+                            {addressLabel}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="context-address">
+
+                        {fullAddress}
+
+                    </div>
+
+
+                    <div class="context-meta">
+
+                        <span>
+                            Customer: {customerName}
+                        </span>
+
+                        <span>
+                            Zone: {zoneName}
+                        </span>
+
+                        <span>
+                            Store: {storeName}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </template>
+
+
+        <template lwc:elseif={contextError}>
+
+            <div class="context-error">
+
+                <strong>
+                    QuickDrop account setup required
+                </strong>
+
+                <span>
+                    {contextError}
+                </span>
+
+            </div>
+
+        </template>
+
+    </section>
+
+
+    <!-- =====================================================
+         HOME
+         ===================================================== -->
+
+    <template lwc:if={isHome}>
+
+        <section class="hero-section">
+
+            <div class="hero-badge">
+                ⚡ QuickDrop Express
+            </div>
+
+
+            <h1>
+                Everything you need.<br />
+                Delivered in minutes.
+            </h1>
+
+
+            <p>
+                Shop groceries, beverages and daily essentials
+                from your nearest QuickDrop store.
+            </p>
+
+
+            <div class="hero-tags">
+
+                <span>
+                    Fresh Products
+                </span>
+
+                <span>
+                    Fast Delivery
+                </span>
+
+                <span>
+                    Secure Payments
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCT CATALOG -->
+
+        <section class="catalog-wrapper">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-label">
+                        QUICKDROP STORE
+                    </div>
+
+                    <h2>
+                        Shop your essentials
+                    </h2>
+
+                    <p>
+                        Choose from our available products.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <c-quick-drop-product-catalog
+                onproductadd={handleProductAdd}>
+            </c-quick-drop-product-catalog>
+
+        </section>
+
+    </template>
+
+
+    <!-- =====================================================
+         CART
+         ===================================================== -->
+
+    <template lwc:if={isCart}>
+
+        <section class="page-section">
+
+            <c-quick-drop-cart
+                customer-id={customerId}
+                store-id={storeId}
+                onproceedcheckout={handleProceedToCheckout}>
+            </c-quick-drop-cart>
+
+        </section>
+
+    </template>
+
+
+    <!-- =====================================================
+         CHECKOUT
+         ===================================================== -->
+
+    <template lwc:if={isCheckout}>
+
+        <section class="page-section">
+
+            <c-quick-drop-checkout>
+            </c-quick-drop-checkout>
+
+        </section>
+
+    </template>
+
+
+    <!-- =====================================================
+         MY ORDERS
+         ===================================================== -->
+
+    <template lwc:if={isOrders}>
+
+        <section class="page-section">
+
+            <c-quick-drop-order-tracker
+                onorderselect={handleOrderSelect}>
+            </c-quick-drop-order-tracker>
+
+        </section>
+
+    </template>
+
+
+    <!-- =====================================================
+     DELIVERY TRACKING
+     ===================================================== -->
+
+<template lwc:if={isTracking}>
+
+    <section class="page-section">
+
+        <button
+            class="back-orders-button"
+            onclick={handleBackToOrders}>
+            ← Back to My Orders
+        </button>
+
+        <c-quick-drop-delivery-tracker
+            order-id={selectedOrderId}>
+        </c-quick-drop-delivery-tracker>
+
+    </section>
+
+</template>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="store-footer">
+
+        <div>
+
+            <strong>
+                QuickDrop
+            </strong>
+
+            <span>
+                Fast. Fresh. Delivered.
+            </span>
+
+        </div>
+
+
+        <div>
+            © 2026 QuickDrop
+        </div>
+
+    </footer>
+
+</template>

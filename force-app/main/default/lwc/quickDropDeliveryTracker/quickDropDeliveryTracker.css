@@ -1,0 +1,292 @@
+.tracker-page {
+    padding: 32px;
+    background: #f5f7fb;
+    min-height: 500px;
+}
+
+.tracker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+}
+
+.brand-label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #1677ff;
+    margin-bottom: 6px;
+}
+
+.tracker-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.tracker-header p {
+    margin: 8px 0 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.refresh-button {
+    border: 1px solid #d9e1ec;
+    background: white;
+    color: #1f2937;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.summary-card,
+.tracker-card,
+.location-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+.summary-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf1f6;
+}
+
+.label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #6b7280;
+}
+
+.summary-top h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.status-badge {
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    padding-top: 20px;
+}
+
+.detail-box {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.detail-box strong {
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.section-heading {
+    margin-bottom: 24px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #111827;
+}
+
+.section-heading p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 12px;
+}
+
+.timeline-step {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+    padding-left: 58px;
+}
+
+.timeline-step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 56px;
+    height: 42px;
+    width: 2px;
+    background: #dbe3ee;
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef2f7;
+    font-size: 20px;
+}
+
+.timeline-step.completed .timeline-icon {
+    background: #dcfce7;
+}
+
+.timeline-step.current .timeline-icon {
+    background: #dbeafe;
+}
+
+.timeline-step.current strong {
+    color: #1677ff;
+}
+
+.timeline-step.pending {
+    opacity: 0.55;
+}
+
+.timeline-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timeline-content strong {
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.timeline-content span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.location-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.location-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #fff1f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.location-card h2 {
+    margin: 0;
+    font-size: 16px;
+    color: #111827;
+}
+
+.location-card p {
+    margin: 5px 0 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.state-card {
+    min-height: 220px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    color: #6b7280;
+}
+
+.state-card h2 {
+    margin: 8px 0 0;
+    color: #111827;
+}
+
+.state-card p {
+    margin: 0;
+    max-width: 600px;
+}
+
+.error-card {
+    border-color: #fecaca;
+}
+
+.state-icon {
+    font-size: 34px;
+}
+
+.retry-button {
+    margin-top: 8px;
+    border: none;
+    background: #1677ff;
+    color: white;
+    border-radius: 9px;
+    padding: 10px 18px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .tracker-page {
+        padding: 18px;
+    }
+
+    .tracker-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.last-updated {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #6b7280;
+}

@@ -1,0 +1,225 @@
+<template>
+
+    <div class="tracker-page">
+
+        <!-- HEADER -->
+        <div class="tracker-header">
+
+            <div>
+                <div class="brand-label">QUICKDROP</div>
+
+                <h1>Track Your Order</h1>
+
+                <p>
+                    Follow your delivery from store to doorstep.
+                </p>
+            </div>
+
+            <button
+                class="refresh-button"
+                onclick={handleRefresh}
+                disabled={isLoading}>
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <!-- LOADING -->
+        <template if:true={isLoading}>
+
+            <div class="state-card">
+
+                <lightning-spinner
+                    alternative-text="Loading delivery"
+                    size="medium">
+                </lightning-spinner>
+
+                <p>Loading delivery details...</p>
+
+            </div>
+
+        </template>
+
+
+        <!-- ERROR -->
+        <template if:true={error}>
+
+            <div class="state-card error-card">
+
+                <div class="state-icon">⚠</div>
+
+                <h2>Delivery Not Available</h2>
+
+                <p>{error}</p>
+
+                <button
+                    class="retry-button"
+                    onclick={handleRefresh}>
+                    Try Again
+                </button>
+
+            </div>
+
+        </template>
+
+
+        <!-- DELIVERY -->
+        <template if:true={hasDelivery}>
+
+            <!-- ORDER SUMMARY -->
+            <section class="summary-card">
+
+                <div class="summary-top">
+
+                    <div>
+                        <span class="label">ORDER</span>
+
+                        <h2>{orderNumber}</h2>
+                    </div>
+
+                    <span class="status-badge">
+                        {currentStatus}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-grid">
+
+                    <div class="detail-box">
+
+                        <span class="detail-label">
+                            Delivery ID
+                        </span>
+
+                        <strong>
+                            {deliveryNumber}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span class="detail-label">
+                            Store
+                        </span>
+
+                        <strong>
+                            {storeName}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span class="detail-label">
+                            Delivery Agent
+                        </span>
+
+                        <strong>
+                            {agentName}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span class="detail-label">
+                            Estimated Delivery
+                        </span>
+
+                        <strong>
+                            {formattedEta}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- TIMELINE -->
+            <section class="tracker-card">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Delivery Status</h2>
+
+                       <div class="last-updated">
+    Last updated: {formattedLastUpdated}
+</div>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline">
+
+                    <template
+                        for:each={timelineSteps}
+                        for:item="step">
+
+                        <div
+                            key={step.label}
+                            class={step.cssClass}>
+
+                            <div class="timeline-icon">
+                                {step.icon}
+                            </div>
+
+
+                            <div class="timeline-content">
+
+                                <strong>
+                                    {step.label}
+                                </strong>
+
+                                <template if:true={step.formattedTime}>
+
+                                    <span>
+                                        {step.formattedTime}
+                                    </span>
+
+                                </template>
+
+                            </div>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </section>
+
+
+            <!-- LOCATION -->
+            <section class="location-card">
+
+                <div class="location-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h2>Current Delivery Location</h2>
+
+                    <p>
+                        {currentLocation}
+                    </p>
+
+                </div>
+
+            </section>
+
+        </template>
+
+    </div>
+
+</template>

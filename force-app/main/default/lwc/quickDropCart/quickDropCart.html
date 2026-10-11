@@ -1,0 +1,251 @@
+<template>
+
+    <section class="cart-container">
+
+        <div class="cart-header">
+
+            <div class="cart-title-area">
+
+                <div class="cart-label">
+                    QUICKDROP
+                </div>
+
+                <h2>
+                    🛒 Your Cart
+                </h2>
+
+                <p>
+                    Review your items before checkout.
+                </p>
+
+            </div>
+
+
+            <div class="cart-count">
+                {cartCount} items
+            </div>
+
+        </div>
+
+
+        <template lwc:if={isLoading}>
+
+            <div class="loading-container">
+
+                <lightning-spinner
+                    alternative-text="Updating cart"
+                    size="small">
+                </lightning-spinner>
+
+            </div>
+
+        </template>
+
+
+        <template lwc:if={isCartEmpty}>
+
+            <div class="empty-cart">
+
+                <div class="empty-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Your cart is empty
+                </h3>
+
+                <p>
+                    Add products from the QuickDrop catalog
+                    to start shopping.
+                </p>
+
+            </div>
+
+        </template>
+
+
+        <template lwc:if={hasCartItems}>
+
+            <div class="cart-content">
+
+                <div class="cart-items">
+
+                    <template
+                        for:each={cartItems}
+                        for:item="item">
+
+                        <article
+                            class="cart-item"
+                            key={item.Id}>
+
+
+                            <div class="product-info">
+
+                                <div class="product-icon">
+                                    🛍️
+                                </div>
+
+
+                                <div class="product-details">
+
+                                    <h3>
+                                        {item.QuickDrop_Product__r.Name}
+                                    </h3>
+
+
+                                    <p class="sku">
+                                        SKU:
+                                        {item.QuickDrop_Product__r.SKU__c}
+                                    </p>
+
+
+                                    <p class="unit-price">
+                                        ₹{item.Unit_Price__c}
+                                        <span>each</span>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="quantity-section">
+
+                                <button
+                                    type="button"
+                                    class="quantity-button"
+                                    data-item-id={item.Id}
+                                    onclick={handleDecrease}
+                                    title="Decrease quantity">
+
+                                    −
+
+                                </button>
+
+
+                                <span class="quantity">
+                                    {item.Quantity__c}
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    class="quantity-button"
+                                    data-item-id={item.Id}
+                                    onclick={handleIncrease}
+                                    title="Increase quantity">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+
+                            <div class="item-total">
+
+                                <strong>
+                                    ₹{item.Line_Total__c}
+                                </strong>
+
+
+                                <button
+                                    type="button"
+                                    class="remove-button"
+                                    data-item-id={item.Id}
+                                    onclick={handleRemove}>
+
+                                    Remove
+
+                                </button>
+
+                            </div>
+
+                        </article>
+
+                    </template>
+
+                </div>
+
+
+                <aside class="summary-card">
+
+                    <h3>
+                        Order Summary
+                    </h3>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Items
+                        </span>
+
+                        <span>
+                            {cartCount}
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <span>
+                            ₹{cartTotal}
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Fee
+                        </span>
+
+                        <span class="free-text">
+                            FREE
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary-divider">
+                    </div>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            ₹{cartTotal}
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="checkout-button"
+                        onclick={handleProceedToCheckout}>
+
+                        Proceed to Checkout
+
+                    </button>
+
+                </aside>
+
+            </div>
+
+        </template>
+
+    </section>
+
+</template>

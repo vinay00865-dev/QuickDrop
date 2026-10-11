@@ -1,0 +1,144 @@
+<template>
+    <div class="orders-page">
+
+        <!-- HEADER -->
+        <div class="orders-header">
+            <div>
+                <div class="brand-label">QUICKDROP</div>
+                <h1>My Orders</h1>
+                <p>View your recent orders and track deliveries.</p>
+            </div>
+
+            <button
+                class="refresh-button"
+                onclick={handleRefresh}
+                disabled={isLoading}>
+                ↻ Refresh
+            </button>
+        </div>
+
+        <!-- LOADING -->
+        <template if:true={isLoading}>
+            <div class="state-card">
+                <lightning-spinner
+                    alternative-text="Loading orders"
+                    size="medium">
+                </lightning-spinner>
+
+                <p>Loading your orders...</p>
+            </div>
+        </template>
+
+        <!-- ERROR -->
+        <template if:true={error}>
+            <div class="state-card error-card">
+                <div class="state-icon">⚠</div>
+                <h2>Unable to Load Orders</h2>
+                <p>{error}</p>
+
+                <button
+                    class="retry-button"
+                    onclick={handleRefresh}>
+                    Try Again
+                </button>
+            </div>
+        </template>
+
+        <!-- EMPTY -->
+        <template if:true={isEmpty}>
+            <div class="state-card">
+                <div class="state-icon">🛍️</div>
+                <h2>No Orders Yet</h2>
+                <p>Your QuickDrop orders will appear here.</p>
+            </div>
+        </template>
+
+        <!-- ORDERS -->
+        <template if:true={hasOrders}>
+            <div class="orders-list">
+
+                <template for:each={formattedOrders} for:item="order">
+
+                    <article
+                        key={order.Id}
+                        class="order-card">
+
+                        <!-- ORDER TOP -->
+                        <div class="order-top">
+
+                            <div>
+                                <span class="order-number">
+                                    {order.Name}
+                                </span>
+
+                                <span class="order-date">
+                                    {order.formattedDate}
+                                </span>
+                            </div>
+
+                            <span class={order.statusClass}>
+                                {order.Status__c}
+                            </span>
+                        </div>
+
+                        <!-- ORDER BODY -->
+                        <div class="order-body">
+
+                            <div class="order-info">
+                                <span class="info-label">Store</span>
+                                <span class="info-value">
+                                    {order.Store__r.Name}
+                                </span>
+                            </div>
+
+                            <div class="order-info">
+                                <span class="info-label">Payment</span>
+                                <span class={order.paymentClass}>
+                                    {order.Payment_Status__c}
+                                </span>
+                            </div>
+
+                            <div class="order-info">
+                                <span class="info-label">Delivery Address</span>
+                                <span class="info-value">
+                                    {order.Delivery_Address__r.Name}
+                                </span>
+                            </div>
+
+                            <div class="order-info total-info">
+                                <span class="info-label">Total</span>
+                                <span class="total-value">
+                                    {order.formattedTotal}
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <!-- ORDER FOOTER -->
+                        <div class="order-footer">
+
+                            <template if:true={order.Estimated_Delivery_Time__c}>
+                                <span class="eta">
+                                    Estimated delivery:
+                                    {order.Estimated_Delivery_Time__c}
+                                </span>
+                            </template>
+
+                            <button
+                                class="track-button"
+                                data-order-id={order.Id}
+                                onclick={handleOrderClick}>
+                                Track Order →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </template>
+
+            </div>
+        </template>
+
+    </div>
+</template>
